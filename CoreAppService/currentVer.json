@@ -1,13 +1,12 @@
 {
-  "latestVersion": "1.1.0",
+  "latestVersion": "1.0.0",
   "minCompatibleVersion": "1.0.0",
-  "releaseDate": "May 12, 2025",
+  "releaseDate": "May 13, 2025",
   "downloadURL": "https://github.com/GeoSn0w/iDevice-Toolkit/",
   "releaseNotes": [
     "Added support for iOS 18.3.2",
     "Improved performance for older devices",
     "Fixed compatibility issues with certain models",
-    "Added new tweaks for Control Center"
   ],
   "criticalUpdate": true
 }
