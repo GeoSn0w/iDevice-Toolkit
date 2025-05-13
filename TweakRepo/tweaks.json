@@ -49,7 +49,7 @@
   },
   {
     "icon": "square.stack.3d.forward.dottedline",
-    "name": "Transparent Media Player & Notifications",
+    "name": "Transparent Player & Notis",
     "paths": [
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeLight.visualstyleset",
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeDark.visualstyleset",
@@ -62,8 +62,8 @@
     "category": "Aesthetics"
   },
   {
-    "icon": "wand.and.stars",
-    "name": "Disable Camera Shutter Sound",
+    "icon": "eye.slash.fill",
+    "name": "Kill Camera Shutter Sound",
     "paths": [
        "/System/Library/Audio/UISounds/photoShutter.caf",
               "/System/Library/Audio/UISounds/begin_record.caf",
@@ -76,8 +76,8 @@
     "category": "Privacy"
   },
    {
-    "icon": "wand.and.stars",
-    "name": "Disable Call Recording Notification",
+    "icon": "eye.slash.fill",
+    "name": "Kill Call Recording Sound",
     "paths": [
        "/var/mobile/Library/CallServices/Greetings/default/StartDisclosure.caf",
         "/var/mobile/Library/CallServices/Greetings/default/StartDisclosureWithTone.m4a",
