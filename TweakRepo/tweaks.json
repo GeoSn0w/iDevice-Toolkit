@@ -45,7 +45,7 @@
       "/System/Library/PrivateFrameworks/ChatKit.framework/bubbleLight.materialrecipe"
     ],
     "description": "Simplify the look of chat bubbles in Messages",
-    "category": "Aesthetics"
+    "category": "Experimental"
   },
   {
     "icon": "square.stack.3d.forward.dottedline",
