@@ -3,6 +3,8 @@
 A powerful iOS tweaking and customization tool for iOS 16.0 – 18.3.2, powered by CVE-2025-24203.  
 Developed by [iDevice Central](https://idevicecentral.com).
 
+<a href="https://idevicecentral.com/tweaks/idevice-toolkit-ipa-download/">Check out the release article / guide for iDevice Toolkit</a>
+
 ---
 
 ## 🔧 What is iDevice Toolkit?
