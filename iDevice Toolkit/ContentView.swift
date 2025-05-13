@@ -476,6 +476,7 @@ struct ContentView: View {
     @State private var isLoadingTweaks: Bool = false
     @State private var tweakLoadError: String? = nil
     @State private var hasEnabledTweaks: Bool = false
+    @State private var showTerminalLog: Bool = false
     
     @State private var cancellableStore = CancellableStore()
     
@@ -493,6 +494,7 @@ struct ContentView: View {
             .onAppear {
                 print("iDevice Toolkit\n[*] Detected device  \(device.systemName!) \(device.systemVersion!), \(device.description)")
                 checkVersionCompatibility()
+                iDeviceLogger("[i] iDevice Central: Terminal session started")
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     updateService.checkForUpdates()
@@ -506,6 +508,9 @@ struct ContentView: View {
                 if updateService.showUpdateAlert {
                     UpdateAlertView()
                 }
+            }
+            .sheet(isPresented: $showTerminalLog) {
+                iDeviceCentralTerminal()
             }
     }
     
@@ -541,6 +546,7 @@ struct ContentView: View {
                 progressText = "Incompatible iOS version"
                 hasError = true
                 print("[!] Incompatible iOS version detected: \(version)")
+                iDeviceLogger("[i] Incompatible iOS version detected")
             }
         }
     }
@@ -557,6 +563,8 @@ struct ContentView: View {
                             self.isLoadingTweaks = false
                             
                             if case .failure(let error) = completion {
+                                iDeviceLogger("[!] Failed to load tweaks: \(error.localizedDescription)")
+                                self.tweakLoadError = error.localizedDescription
                                 print("[!] Failed to load tweaks: \(error.localizedDescription)")
                                 self.tweakLoadError = error.localizedDescription
                             }
@@ -566,6 +574,12 @@ struct ContentView: View {
                         DispatchQueue.main.async {
                             self.tweaks = loadedTweaks
                             print("[+] Successfully loaded \(loadedTweaks.count) tweaks")
+                            if !loadedTweaks.isEmpty {
+                                let categories = Dictionary(grouping: loadedTweaks) { $0.category }
+                                for (category, tweaks) in categories {
+                                    iDeviceLogger("   • \(category.rawValue): \(tweaks.count) tweaks")
+                                }
+                            }
                         }
                     }
                 )
@@ -684,6 +698,18 @@ struct ContentView: View {
             Spacer()
             
             Button(action: {
+                iDeviceLogger("Opening terminal window")
+                withAnimation {
+                    showTerminalLog.toggle()
+                }
+            }) {
+                Image(systemName: "terminal")
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(ToolkitColors.accent.opacity(0.9))
+            }
+            .padding(.trailing, 8)
+            
+            Button(action: {
                 updateService.checkForUpdates()
             }) {
                 Image(systemName: "arrow.triangle.2.circlepath")
@@ -788,7 +814,7 @@ struct ContentView: View {
                 }
             }
             revertTweaksInfoPanel
-                        .padding(.bottom, 8)
+                .padding(.bottom, 8)
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 100)
@@ -824,47 +850,47 @@ struct ContentView: View {
     }
     
     private func applyButtonView(scrollProxy: ScrollViewProxy) -> some View {
-            VStack(spacing: 12) {
-                ToolkitButton(
-                    icon: "newspaper.fill",
-                    text: "iOS Jailbreak News",
-                    disabled: false
-                ) {
-                    if let url = URL(string: "https://idevicecentral.com") {
-                        UIApplication.shared.open(url)
-                    }
+        VStack(spacing: 12) {
+            ToolkitButton(
+                icon: "newspaper.fill",
+                text: "iOS Jailbreak News",
+                disabled: false
+            ) {
+                if let url = URL(string: "https://idevicecentral.com") {
+                    UIApplication.shared.open(url)
                 }
-                .padding(.horizontal, 16)
-                
-                ToolkitButton(
-                    icon: tweaksAppliedSuccessfully ? "arrow.clockwise" : "bolt.fill",
-                    text: tweaksAppliedSuccessfully ? "Respring to apply" :
-                        (progressStep > 0 ? "Cancel Operation" : "Apply Tweaks"),
-                    disabled: !hasEnabledTweaks && progressStep == 0 && !tweaksAppliedSuccessfully || !isVersionCompatible
-                ) {
-                    if progressStep > 0 {
-                        resetProgress()
-                    } else if tweaksAppliedSuccessfully {
-                        withAnimation {
-                            showRespringInstructions = true
-                        }
-                    } else {
-                        runOperation()
-                        
-                        withAnimation {
-                            scrollProxy.scrollTo("progressArea", anchor: .top)
-                        }
-                    }
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 12)
             }
-            .background(
-                Rectangle()
-                    .fill(ToolkitColors.background)
-                    .shadow(color: .black.opacity(0.4), radius: 8, y: -4)
-            )
+            .padding(.horizontal, 16)
+            
+            ToolkitButton(
+                icon: tweaksAppliedSuccessfully ? "arrow.clockwise" : "bolt.fill",
+                text: tweaksAppliedSuccessfully ? "Respring to apply" :
+                    (progressStep > 0 ? "Cancel Operation" : "Apply Tweaks"),
+                disabled: !hasEnabledTweaks && progressStep == 0 && !tweaksAppliedSuccessfully || !isVersionCompatible
+            ) {
+                if progressStep > 0 {
+                    resetProgress()
+                } else if tweaksAppliedSuccessfully {
+                    withAnimation {
+                        showRespringInstructions = true
+                    }
+                } else {
+                    runOperation()
+                    
+                    withAnimation {
+                        scrollProxy.scrollTo("progressArea", anchor: .top)
+                    }
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 12)
         }
+        .background(
+            Rectangle()
+                .fill(ToolkitColors.background)
+                .shadow(color: .black.opacity(0.4), radius: 8, y: -4)
+        )
+    }
     
     private var aboutOverlay: some View {
         ZStack {
@@ -956,7 +982,7 @@ struct ContentView: View {
                                 .foregroundColor(.white.opacity(0.9))
                                 .padding(.bottom, 4)
                             
-                            Text("• Thanks to [Skadz](https://twitter.com/skadz108) of dirtyZero project for the original inspiration, code and tweak paths")
+                            Text("• Thanks to [jailbreak.party](https://github.com/jailbreakdotparty) of dirtyZero project for the original inspiration, code and tweak paths")
                                 .font(.system(size: 14))
                                 .foregroundColor(.white.opacity(0.8))
                                 .fixedSize(horizontal: false, vertical: true)
@@ -997,6 +1023,8 @@ struct ContentView: View {
         guard !enabledTweaks.isEmpty else { return }
         hasError = false
         
+        iDeviceLogger("[*] Starting operation with \(enabledTweaks.count) enabled tweaks")
+        
         withAnimation {
             progressStep = 1
             progressText = "Running exploit..."
@@ -1010,14 +1038,30 @@ struct ContentView: View {
                 var applyingString = "[+] Applying the selected tweaks: "
                 let tweakNames = self.enabledTweaks.map { $0.name }.joined(separator: ", ")
                 applyingString += tweakNames
-                print(applyingString)
+                iDeviceLogger(applyingString)
+                
+                iDeviceLogger("\n[*] Detailed tweak information:")
+                for (index, tweak) in self.enabledTweaks.enumerated() {
+                    iDeviceLogger("\n[\(index + 1)/\(self.enabledTweaks.count)] Tweak: \(tweak.name)")
+                    
+                    iDeviceLogger("    • Paths to modify:")
+                    
+                    for (pathIndex, path) in tweak.paths.enumerated() {
+                        iDeviceLogger("      \(pathIndex + 1). \(path)")
+                    }
+                }
+                
+                iDeviceLogger("\n[*] Beginning tweak application process...")
             }
             
             let stats = TweakStats()
             
             self.processTweaks(tweaks: self.enabledTweaks, index: 0, stats: stats) {
                 self.proceedToVerification(successCount: stats.successCount, failedCount: stats.failedCount)
-            }
+                withAnimation {
+                    showTerminalLog.toggle()
+                    
+                }}
         }
     }
     
@@ -1026,48 +1070,106 @@ struct ContentView: View {
         var failedCount: Int = 0
         var pathsSucceeded: Int = 0
         var pathsFailed: Int = 0
+        
+        var pathFailures: [(path: String, reason: String)] = []
+        
+        func addFailedPath(path: String, reason: String) {
+            pathsFailed += 1
+            pathFailures.append((path: path, reason: reason))
+        }
     }
     
     private func processTweaks(tweaks: [TweakPathForFile], index: Int, stats: TweakStats, completion: @escaping () -> Void) {
         guard index < tweaks.count else {
+            iDeviceLogger("\n[*] iDevice ToolKit Tweak Log")
+            if stats.successCount > 0 {
+                iDeviceLogger("[✓] \(stats.successCount) tweaks successfully applied")
+            }
+            if stats.failedCount > 0 {
+                iDeviceLogger("[✗] \(stats.failedCount) tweaks failed to apply")
+            }
             completion()
             return
         }
         
         let tweak = tweaks[index]
+        iDeviceLogger("\n[*] Processing tweak [\(index + 1)/\(tweaks.count)]: \(tweak.name)")
+        
         let pathStats = TweakStats()
         
         self.processPaths(tweak: tweak, pathIndex: 0, pathStats: pathStats) {
+            iDeviceLogger("----------------------------------------------")
+            
             if pathStats.pathsFailed == 0 {
                 stats.successCount += 1
+                iDeviceLogger("✅ TWEAK STATUS: \(tweak.name) - SUCCESSFULLY APPLIED")
+                iDeviceLogger("   • All \(pathStats.pathsSucceeded) paths successfully modified")
             } else if pathStats.pathsSucceeded > 0 {
                 stats.failedCount += 1
+                iDeviceLogger("⚠️ TWEAK STATUS: \(tweak.name) - PARTIALLY APPLIED")
+                iDeviceLogger("   • \(pathStats.pathsSucceeded) paths succeeded")
+                iDeviceLogger("   • \(pathStats.pathsFailed) paths failed")
+                
+                if !pathStats.pathFailures.isEmpty {
+                    iDeviceLogger("   • Failure details:")
+                    for (index, failure) in pathStats.pathFailures.enumerated() {
+                        iDeviceLogger("     \(index + 1). Path: \(failure.path)")
+                        iDeviceLogger("        Reason: \(failure.reason)")
+                    }
+                }
             } else {
                 stats.failedCount += 1
+                iDeviceLogger("❌ TWEAK STATUS: \(tweak.name) - FAILED")
+                iDeviceLogger("   • All \(pathStats.pathsFailed) paths failed to apply")
+                
+                if !pathStats.pathFailures.isEmpty {
+                    iDeviceLogger("   • Failure details:")
+                    for (index, failure) in pathStats.pathFailures.enumerated() {
+                        iDeviceLogger("     \(index + 1). Path: \(failure.path)")
+                        iDeviceLogger("        Reason: \(failure.reason)")
+                    }
+                }
             }
+            iDeviceLogger("----------------------------------------------")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.processTweaks(tweaks: tweaks, index: index + 1, stats: stats, completion: completion)
             }
         }
     }
-    
     private func processPaths(tweak: TweakPathForFile, pathIndex: Int, pathStats: TweakStats, completion: @escaping () -> Void) {
         guard pathIndex < tweak.paths.count else {
+            iDeviceLogger("[*] Finished processing all paths for \(tweak.name)")
             completion()
             return
         }
         
         let path = tweak.paths[pathIndex]
         
-        print("[i] Tweak \(tweak.name): \(path)")
+        iDeviceLogger("[>] Tweak \(tweak.name): Processing path [\(pathIndex + 1)/\(tweak.paths.count)]: \(path)")
         
         do {
-            try runExploitForPath(path: path)
-            pathStats.pathsSucceeded += 1
+            let errorReason = try runExploitForPath(path: path)
+            if errorReason == nil {
+                pathStats.pathsSucceeded += 1
+                iDeviceLogger("[+] Successfully exploited path: \(path)")
+            } else if let reason = errorReason {
+                pathStats.addFailedPath(path: path, reason: reason)
+                iDeviceLogger("[!] Error applying path: \(path)")
+                iDeviceLogger("    Error details: \(reason)")
+            }
         } catch {
-            pathStats.pathsFailed += 1
-            print("[!] Error applying tweak: \(tweak.name): \(error)")
+            let reason: String
+            if let nsError = error as NSError? {
+                reason = nsError.localizedDescription
+                pathStats.addFailedPath(path: path, reason: reason)
+            } else {
+                reason = error.localizedDescription
+                pathStats.addFailedPath(path: path, reason: reason)
+            }
+            
+            iDeviceLogger("[!] Error applying path: \(path)")
+            iDeviceLogger("    Error details: \(reason)")
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -1081,26 +1183,48 @@ struct ContentView: View {
                 progressStep = 3
                 progressText = "Verifying changes..."
                 
+                iDeviceLogger("\n[*] Verifying tweak application results")
+                
                 self.hasError = successCount == 0 && failedCount > 0
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     withAnimation {
+                        iDeviceLogger("\n================================================")
+                        iDeviceLogger("            FINAL OPERATION RESULT              ")
+                        iDeviceLogger("================================================")
+                        
                         if failedCount == 0 {
                             progressText = "Tweaks applied successfully!"
-                            print("[i] Tweaks applied successfully!")
+                            iDeviceLogger("✅ SUCCESS: All \(successCount) tweaks applied successfully!")
                             tweaksAppliedSuccessfully = true
                             progressStep = 0
                         } else if successCount > 0 {
                             progressText = "\(successCount) tweaks applied, \(failedCount) failed"
-                            print("[*] \(successCount) tweaks applied, \(failedCount) failed")
+                            iDeviceLogger("⚠️ PARTIAL SUCCESS: \(successCount) tweaks applied, \(failedCount) failed")
                             tweaksAppliedSuccessfully = successCount > 0
                             progressStep = 0
                         } else {
                             progressText = "Failed to apply any tweaks"
-                            print("[*] Failed to apply any tweaks")
+                            iDeviceLogger("❌ FAILED: Could not apply any tweaks")
                             self.hasError = true
                             tweaksAppliedSuccessfully = false
                         }
+                        
+                        if tweaksAppliedSuccessfully {
+                            iDeviceLogger("\n[*] NEXT STEPS:")
+                            iDeviceLogger("   1. Respring your device to apply changes")
+                            iDeviceLogger("   2. Go to Settings > Display & Brightness")
+                            iDeviceLogger("   3. Tap Display Zoom and switch views to trigger respring")
+                        } else {
+                            iDeviceLogger("\n[*] NEXT STEPS:")
+                            iDeviceLogger("   • Try again with different tweaks or check device compatibility")
+                        }
+                        
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                        let timestamp = dateFormatter.string(from: Date())
+                        iDeviceLogger("\n[*] Operation completed at \(timestamp)")
+                        iDeviceLogger("================================================")
                     }
                 }
             }
@@ -1119,7 +1243,6 @@ struct ContentView: View {
                 }
             
             VStack(spacing: 0) {
-                // Header
                 HStack {
                     Text("Respring Required")
                         .font(.system(size: 18, weight: .semibold))
@@ -1244,10 +1367,13 @@ struct ContentView: View {
         print("[!] Tweaking canceled by user.")
     }
     
-    private func runExploitForPath(path: String) throws {
+    private func runExploitForPath(path: String) throws -> String? {
+        iDeviceLogger("[*] Running exploit for path: \(path)")
         
         guard let cPath = strdup(path) else {
-            throw NSError(domain: "ExploitError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to allocate memory for path"])
+            let errorMessage = "Failed to allocate memory for path"
+            iDeviceLogger("[!] ERROR: \(errorMessage)")
+            return errorMessage
         }
         
         defer {
@@ -1257,7 +1383,34 @@ struct ContentView: View {
         let result = poc(cPath)
         
         if result != 0 {
-            throw NSError(domain: "ExploitError", code: Int(result), userInfo: [NSLocalizedDescriptionKey: "Exploit failed with code \(result)"])
+            let errorMessage: String
+            switch result {
+            case 2: // ENOENT
+                errorMessage = "File not found - The path doesn't exist"
+            case 13: // EACCES
+                errorMessage = "Permission denied - Cannot access the file"
+            case 1: // EPERM
+                errorMessage = "Operation not permitted - Insufficient privileges"
+            case 21: // EISDIR
+                errorMessage = "Expected a file but found a directory"
+            case 20: // ENOTDIR
+                errorMessage = "Expected a directory but found a file"
+            case 28: // ENOSPC
+                errorMessage = "No space left on device"
+            case 9: // EBADF
+                errorMessage = "Bad file descriptor"
+            case 22: // EINVAL
+                errorMessage = "Invalid argument for operation"
+            default:
+                errorMessage = "Exploit failed with code \(result)"
+            }
+            
+            iDeviceLogger("[!] EXPLOIT ERROR: \(errorMessage)")
+            throw NSError(domain: "ExploitError", code: Int(result), userInfo: [NSLocalizedDescriptionKey: errorMessage])
+            
+        } else {
+            iDeviceLogger("[+] Exploit succeeded for path: \(path)")
+            return nil
         }
     }
 }

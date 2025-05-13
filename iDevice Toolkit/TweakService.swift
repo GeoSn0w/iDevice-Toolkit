@@ -88,7 +88,6 @@ struct DefaultTweaks {
     }()
     
     // The default tweaks JSON string in case the user has no wifi, etc.
-    // I skidded some of these paths from Skadz and he got mad even tho I am crediting them. Why open source your shit then? :|
     
     static let defaultTweaksJSON = """
     [
