@@ -35,7 +35,7 @@ You can install **iDevice Toolkit** using any of the following tools:
 - AltStore
 - ESign
 - [FlekSt0re](https://idevicecentral.com/ios-guide/how-to-get-tweaked-apps-using-flekst0re-on-ios-17/)
-- [TrollStore](https://github.com/opa334/TrollStore](https://idevicecentral.com/jailbreak-tools/how-to-install-trollstore-on-ios-17-using-trollrestore/) *(Recommended if compatible)*
+- [TrollStore](https://idevicecentral.com/jailbreak-tools/how-to-install-trollstore-on-ios-17-using-trollrestore/) *(Recommended if compatible)*
 
 After installation, simply launch the app and apply your desired tweaks. Tweaks run in RAM, so if something goes wrong, just reboot the device and they will be disabled.
 
