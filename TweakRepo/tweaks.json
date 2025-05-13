@@ -1,0 +1,98 @@
+[
+  {
+    "icon": "dock.rectangle",
+    "name": "Hide Dock",
+    "paths": [
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/dockDark.materialrecipe",
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/dockLight.materialrecipe"
+    ],
+    "description": "Completely remove the dock background from your home screen",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "line.3.horizontal",
+    "name": "Hide Home Bar",
+    "paths": [
+      "/System/Library/PrivateFrameworks/MaterialKit.framework/Assets.car"
+    ],
+    "description": "Remove the bottom home indicator bar",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "folder",
+    "name": "Hide Folder Backgrounds",
+    "paths": [
+      "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderDark.materialrecipe",
+      "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderLight.materialrecipe"
+    ],
+    "description": "Make app folders completely transparent",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "bell.badge",
+    "name": "Hide Notification Backgrounds",
+    "paths": [
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeLight.visualstyleset",
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeDark.visualstyleset",
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/plattersDark.materialrecipe",
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platters.materialrecipe"
+    ],
+    "description": "Make notification backgrounds completely transparent",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "lock.iphone",
+    "name": "Hide Unlock Background",
+    "paths": [
+      "/System/Library/PrivateFrameworks/CoverSheet.framework/dashBoardPasscodeBackground.materialrecipe"
+    ],
+    "description": "Remove the passcode entry background on the lock screen",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "bubble.left",
+    "name": "Clean Message Bubbles",
+    "paths": [
+      "/System/Library/PrivateFrameworks/ChatKit.framework/bubbleDark.materialrecipe",
+      "/System/Library/PrivateFrameworks/ChatKit.framework/bubbleLight.materialrecipe"
+    ],
+    "description": "Simplify the look of chat bubbles in Messages",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "bolt.fill",
+    "name": "Disable Animation",
+    "paths": [
+      "/System/Library/PrivateFrameworks/SpringBoard.framework/SpringBoardAnimations.plist"
+    ],
+    "description": "Reduce system animations for improved responsiveness",
+    "category": "Performance"
+  },
+  {
+    "icon": "hammer.fill",
+    "name": "Disable Transparency",
+    "paths": [
+      "/System/Library/PrivateFrameworks/UIKit.framework/UIAccessibility.plist"
+    ],
+    "description": "Reduce transparency effects for better performance",
+    "category": "Performance"
+  },
+  {
+    "icon": "eye.slash.fill",
+    "name": "Hide Screen Recording Indicator",
+    "paths": [
+      "/System/Library/PrivateFrameworks/SpringBoard.framework/SBScreenRecordingIndicator.bundle"
+    ],
+    "description": "Remove the recording indicator when capturing screen",
+    "category": "Privacy"
+  },
+  {
+    "icon": "wand.and.stars",
+    "name": "Custom Control Center",
+    "paths": [
+      "/System/Library/PrivateFrameworks/ControlCenterUI.framework/DefaultModuleConfiguration.plist"
+    ],
+    "description": "Allows additional modules in Control Center (experimental)",
+    "category": "Experimental"
+  }
+]
