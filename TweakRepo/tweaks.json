@@ -74,17 +74,5 @@
       ],
     "description": "Disables camera shutter sound. Killing the Camera app may re-enable it. Tweak by @straight_tamago",
     "category": "Privacy"
-  },
-   {
-    "icon": "eye.slash.fill",
-    "name": "Kill Call Recording Sound",
-    "paths": [
-       "/var/mobile/Library/CallServices/Greetings/default/StartDisclosure.caf",
-        "/var/mobile/Library/CallServices/Greetings/default/StartDisclosureWithTone.m4a",
-        "/var/mobile/Library/CallServices/Greetings/default/StopDisclosure.caf",
-        "/System/Library/PrivateFrameworks/ConversationKit.framework/call_recording_countdown.caf"
-      ],
-    "description": "Disables the notification sound for enabled call recording on iOS 18+. Tweak by @straight_tamago",
-    "category": "Privacy"
-  },
+  }
 ]
