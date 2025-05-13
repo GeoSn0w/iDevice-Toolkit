@@ -1,7 +1,7 @@
 [
   {
     "icon": "dock.rectangle",
-    "name": "Hide Dock",
+    "name": "Hide the Dock",
     "paths": [
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/dockDark.materialrecipe",
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/dockLight.materialrecipe"
@@ -11,7 +11,7 @@
   },
   {
     "icon": "line.3.horizontal",
-    "name": "Hide Home Bar",
+    "name": "Hide the Home Bar",
     "paths": [
       "/System/Library/PrivateFrameworks/MaterialKit.framework/Assets.car"
     ],
