@@ -1,12 +1,13 @@
 {
-  "latestVersion": "1.1.0",
+  "latestVersion": "1.2.0",
   "minCompatibleVersion": "1.0.0",
   "releaseDate": "May 13, 2025",
   "downloadURL": "https://idevicecentral.com/tweaks/idevice-toolkit-ipa-download/",
   "releaseNotes": [
-    "Switched back to the C version of the exploit, which is much more reliable. It should now work to apply tweaks with a greater success rate.",
-    "Added info about how to revert the tweaks.",
-    "Minor bug fixes."
+    "I added a terminal view (see icon at the top right corner) that keeps logs of what is going on so you can send me logs if something is not working.",
+    "Improved the exploit to no longer crash the app when a tweak fails.",
+    "Disabled the Call Recording tweak for now. It needs work.",
+    "Fixed several bugs."
   ],
   "criticalUpdate": true
 }
