@@ -54,7 +54,7 @@ After installation, simply launch the app and apply your desired tweaks. Tweaks 
 ## 🙏 Credits & Thanks
 
 - 💡 Thanks to [**Skadz**](https://twitter.com/skadz108) of **dirtyZero** project for original inspiration, code, and tweak paths  
-- 💡 Thanks to [**straight_tamago**](https://twitter.com/straight_tamago) of **mdc0** project for original inspiration, code, and tweak paths  
+- 💡 Thanks to [**straight_tamago**](https://twitter.com/straight_tamago), and [**Huy Nguyen**](https://x.com/Little_34306) of **mdc0** project for original inspiration, code, and tweak paths  
 - 🐛 Huge thanks to **Ian Beer** for the [CVE-2025-24203](https://project-zero.issues.chromium.org/issues/391518636) exploit  
 - 🧰 [Tool-box icons by Freepik - Flaticon](https://www.flaticon.com/free-icons/tool-box)
 
