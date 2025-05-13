@@ -189,10 +189,10 @@ struct StepProgressView: View {
     
     private func getStepName(_ step: Int) -> String {
         switch step {
-        case 0: return "Prepare"
+        case 0: return "start"
         case 1: return "Exploit"
-        case 2: return "Apply"
-        case 3: return "Respring"
+        case 2: return "Tweak"
+        case 3: return "Done"
         default: return "Step \(step + 1)"
         }
     }
@@ -278,6 +278,7 @@ struct TweakCategoryView: View {
     var tweaks: [TweakPathForFile]
     @Binding var isExpanded: Bool
     @Binding var enabledTweakIds: [String]
+    @Binding var hasEnabledTweaks: Bool
     
     var body: some View {
         VStack(spacing: 0) {
@@ -359,6 +360,8 @@ struct TweakCategoryView: View {
         } else {
             enabledTweakIds.append(tweak.id)
         }
+        
+        hasEnabledTweaks = !enabledTweakIds.isEmpty
     }
 }
 
@@ -472,6 +475,7 @@ struct ContentView: View {
     @State private var tweaks: [TweakPathForFile] = []
     @State private var isLoadingTweaks: Bool = false
     @State private var tweakLoadError: String? = nil
+    @State private var hasEnabledTweaks: Bool = false
     
     @State private var cancellableStore = CancellableStore()
     
@@ -777,47 +781,90 @@ struct ContentView: View {
                             get: { categoryExpanded[category] ?? false },
                             set: { categoryExpanded[category] = $0 }
                         ),
-                        enabledTweakIds: $enabledTweakIds
+                        enabledTweakIds: $enabledTweakIds,
+                        hasEnabledTweaks: $hasEnabledTweaks
                     )
                     .padding(.bottom, 8)
                 }
             }
+            revertTweaksInfoPanel
+                        .padding(.bottom, 8)
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 100)
     }
     
-    private func applyButtonView(scrollProxy: ScrollViewProxy) -> some View {
-        VStack {
-            ToolkitButton(
-                icon: tweaksAppliedSuccessfully ? "arrow.clockwise" : "bolt.fill",
-                text: tweaksAppliedSuccessfully ? "Respring to apply" :
-                    (progressStep > 0 ? "Cancel Operation" : "Apply Tweaks"),
-                disabled: enabledTweaks.isEmpty && progressStep == 0 && !tweaksAppliedSuccessfully || !isVersionCompatible
-            ) {
-                if progressStep > 0 {
-                    resetProgress()
-                } else if tweaksAppliedSuccessfully {
-                    withAnimation {
-                        showRespringInstructions = true
-                    }
-                } else {
-                    runOperation()
-                    
-                    withAnimation {
-                        scrollProxy.scrollTo("progressArea", anchor: .top)
-                    }
-                }
+    private var revertTweaksInfoPanel: some View {
+        HStack(alignment: .top, spacing: 16) {
+            Image(systemName: "arrow.uturn.backward.circle.fill")
+                .font(.system(size: 28))
+                .foregroundColor(ToolkitColors.accent)
+                .padding(.top, 2)
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("How to Revert Tweaks")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.white)
+                
+                Text("All tweaks are applied directly to RAM and not persistent storage. If you encounter any issues or want to revert to stock settings, simply restart your device to clear all tweaks from memory.")
+                    .font(.system(size: 14))
+                    .foregroundColor(.white.opacity(0.8))
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
         }
+        .padding(16)
         .background(
-            Rectangle()
-                .fill(ToolkitColors.background)
-                .shadow(color: .black.opacity(0.4), radius: 8, y: -4)
+            RoundedRectangle(cornerRadius: 16)
+                .fill(ToolkitColors.darkBlue.opacity(0.3))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(ToolkitColors.accent.opacity(0.3), lineWidth: 1)
+                )
         )
     }
+    
+    private func applyButtonView(scrollProxy: ScrollViewProxy) -> some View {
+            VStack(spacing: 12) {
+                ToolkitButton(
+                    icon: "newspaper.fill",
+                    text: "iOS Jailbreak News",
+                    disabled: false
+                ) {
+                    if let url = URL(string: "https://idevicecentral.com") {
+                        UIApplication.shared.open(url)
+                    }
+                }
+                .padding(.horizontal, 16)
+                
+                ToolkitButton(
+                    icon: tweaksAppliedSuccessfully ? "arrow.clockwise" : "bolt.fill",
+                    text: tweaksAppliedSuccessfully ? "Respring to apply" :
+                        (progressStep > 0 ? "Cancel Operation" : "Apply Tweaks"),
+                    disabled: !hasEnabledTweaks && progressStep == 0 && !tweaksAppliedSuccessfully || !isVersionCompatible
+                ) {
+                    if progressStep > 0 {
+                        resetProgress()
+                    } else if tweaksAppliedSuccessfully {
+                        withAnimation {
+                            showRespringInstructions = true
+                        }
+                    } else {
+                        runOperation()
+                        
+                        withAnimation {
+                            scrollProxy.scrollTo("progressArea", anchor: .top)
+                        }
+                    }
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+            }
+            .background(
+                Rectangle()
+                    .fill(ToolkitColors.background)
+                    .shadow(color: .black.opacity(0.4), radius: 8, y: -4)
+            )
+        }
     
     private var aboutOverlay: some View {
         ZStack {
@@ -1198,11 +1245,19 @@ struct ContentView: View {
     }
     
     private func runExploitForPath(path: String) throws {
-        do {
-            try runCVEForPaths(path: path)
-        } catch {
-            print("[!] Error: \(error)")
-            throw error
+        
+        guard let cPath = strdup(path) else {
+            throw NSError(domain: "ExploitError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to allocate memory for path"])
+        }
+        
+        defer {
+            free(cPath)
+        }
+        
+        let result = poc(cPath)
+        
+        if result != 0 {
+            throw NSError(domain: "ExploitError", code: Int(result), userInfo: [NSLocalizedDescriptionKey: "Exploit failed with code \(result)"])
         }
     }
 }

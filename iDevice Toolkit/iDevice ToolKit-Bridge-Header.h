@@ -1,0 +1,1 @@
+int poc(char *path);
