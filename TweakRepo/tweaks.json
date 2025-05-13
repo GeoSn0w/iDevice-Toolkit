@@ -6,7 +6,7 @@
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/dockDark.materialrecipe",
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/dockLight.materialrecipe"
     ],
-    "description": "Completely remove the dock background from your home screen",
+    "description": "Completely remove the dock background from your home screen. Tweak by @Skadz108.",
     "category": "Aesthetics"
   },
   {
@@ -15,7 +15,7 @@
     "paths": [
       "/System/Library/PrivateFrameworks/MaterialKit.framework/Assets.car"
     ],
-    "description": "Remove the bottom home indicator bar",
+    "description": "Remove the bottom home indicator bar. Tweak by @Skadz108.",
     "category": "Aesthetics"
   },
   {
@@ -25,19 +25,7 @@
       "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderDark.materialrecipe",
       "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderLight.materialrecipe"
     ],
-    "description": "Make app folders completely transparent",
-    "category": "Aesthetics"
-  },
-  {
-    "icon": "bell.badge",
-    "name": "Hide Notification Backgrounds",
-    "paths": [
-      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeLight.visualstyleset",
-      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeDark.visualstyleset",
-      "/System/Library/PrivateFrameworks/CoreMaterial.framework/plattersDark.materialrecipe",
-      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platters.materialrecipe"
-    ],
-    "description": "Make notification backgrounds completely transparent",
+    "description": "Make app folders completely transparent. Tweak by @Skadz108.",
     "category": "Aesthetics"
   },
   {
@@ -60,39 +48,43 @@
     "category": "Aesthetics"
   },
   {
-    "icon": "bolt.fill",
-    "name": "Disable Animation",
+    "icon": "square.stack.3d.forward.dottedline",
+    "name": "Transparent Media Player & Notifications",
     "paths": [
-      "/System/Library/PrivateFrameworks/SpringBoard.framework/SpringBoardAnimations.plist"
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeLight.visualstyleset",
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeDark.visualstyleset",
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/plattersDark.materialrecipe",
+      "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderLight.materialrecipe",
+      "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderDark.materialrecipe",
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platters.materialrecipe"
     ],
-    "description": "Reduce system animations for improved responsiveness",
-    "category": "Performance"
-  },
-  {
-    "icon": "hammer.fill",
-    "name": "Disable Transparency",
-    "paths": [
-      "/System/Library/PrivateFrameworks/UIKit.framework/UIAccessibility.plist"
-    ],
-    "description": "Reduce transparency effects for better performance",
-    "category": "Performance"
-  },
-  {
-    "icon": "eye.slash.fill",
-    "name": "Hide Screen Recording Indicator",
-    "paths": [
-      "/System/Library/PrivateFrameworks/SpringBoard.framework/SBScreenRecordingIndicator.bundle"
-    ],
-    "description": "Remove the recording indicator when capturing screen",
-    "category": "Privacy"
+    "description": "Transparent Media Player & Notifications. Tweak by @straight_tamago / mdc0",
+    "category": "Aesthetics"
   },
   {
     "icon": "wand.and.stars",
-    "name": "Custom Control Center",
+    "name": "Disable Camera Shutter Sound",
     "paths": [
-      "/System/Library/PrivateFrameworks/ControlCenterUI.framework/DefaultModuleConfiguration.plist"
-    ],
-    "description": "Allows additional modules in Control Center (experimental)",
-    "category": "Experimental"
-  }
+       "/System/Library/Audio/UISounds/photoShutter.caf",
+              "/System/Library/Audio/UISounds/begin_record.caf",
+              "/System/Library/Audio/UISounds/end_record.caf",
+              "/System/Library/Audio/UISounds/Modern/camera_shutter_burst.caf",
+              "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_begin.caf",
+              "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf"
+      ],
+    "description": "Disables camera shutter sound. Killing the Camera app may re-enable it. Tweak by @straight_tamago",
+    "category": "Privacy"
+  },
+   {
+    "icon": "wand.and.stars",
+    "name": "Disable Call Recording Notification",
+    "paths": [
+       "/var/mobile/Library/CallServices/Greetings/default/StartDisclosure.caf",
+        "/var/mobile/Library/CallServices/Greetings/default/StartDisclosureWithTone.m4a",
+        "/var/mobile/Library/CallServices/Greetings/default/StopDisclosure.caf",
+        "/System/Library/PrivateFrameworks/ConversationKit.framework/call_recording_countdown.caf"
+      ],
+    "description": "Disables the notification sound for enabled call recording on iOS 18+. Tweak by @straight_tamago",
+    "category": "Privacy"
+  },
 ]
