@@ -1,12 +1,12 @@
 {
-  "latestVersion": "1.0.0",
+  "latestVersion": "1.1.0",
   "minCompatibleVersion": "1.0.0",
   "releaseDate": "May 13, 2025",
-  "downloadURL": "https://github.com/GeoSn0w/iDevice-Toolkit/",
+  "downloadURL": "https://idevicecentral.com/tweaks/idevice-toolkit-ipa-download/",
   "releaseNotes": [
-    "Added support for iOS 18.3.2",
-    "Improved performance for older devices",
-    "Fixed compatibility issues with certain models",
+    "Switched back to the C version of the exploit, which is much more reliable. It should now work to apply tweaks with a greater success rate.",
+    "Added info about how to revert the tweaks.",
+    "Minor bug fixes."
   ],
   "criticalUpdate": true
 }
