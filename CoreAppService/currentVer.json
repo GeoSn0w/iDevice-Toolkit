@@ -1,13 +1,15 @@
 {
-  "latestVersion": "1.2.0",
+  "latestVersion": "1.3.0",
   "minCompatibleVersion": "1.0.0",
   "releaseDate": "May 13, 2025",
   "downloadURL": "https://idevicecentral.com/tweaks/idevice-toolkit-ipa-download/",
   "releaseNotes": [
-    "I added a terminal view (see icon at the top right corner) that keeps logs of what is going on so you can send me logs if something is not working.",
-    "Improved the exploit to no longer crash the app when a tweak fails.",
-    "Disabled the Call Recording tweak for now. It needs work.",
-    "Fixed several bugs."
+    "This is a BIG update!",
+    "You can now create your own custom tweaks and run them.",
+    "You can share the tweaks you make.",
+    "You can browse the file system using the built-in File Manager and select files to use in your own tweaks.",
+    "Cleaned up the UI a bit",
+    "Added some more tweaks"
   ],
   "criticalUpdate": true
 }
