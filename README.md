@@ -25,6 +25,7 @@ Developed by [iDevice Central](https://idevicecentral.com).
 - 📺 **Transparent Media Player & Notifications**
 - 📷 **Disable Camera Shutter Sound**
 - 📞 **Disable Call Recording Notification Sound** *(iOS 18+)*
+- ⚙️ **Make your own Tweaks directly from the app!**
 - More to come!
 
 ---
