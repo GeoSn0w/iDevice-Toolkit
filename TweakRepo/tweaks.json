@@ -82,6 +82,6 @@
        "/usr/lib/dyld"
       ],
     "description": "Force reboot iOS by inducing a panic for funziez. Tweak by @skadz108",
-    "category": "Experimenatal"
+    "category": "Experimental"
   }
 ]
