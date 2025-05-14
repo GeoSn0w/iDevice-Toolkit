@@ -74,5 +74,14 @@
       ],
     "description": "Disables camera shutter sound. Killing the Camera app may re-enable it. Tweak by @straight_tamago",
     "category": "Privacy"
+  },
+  {
+    "icon": "power.circle.fill",
+    "name": "Force Reboot iOS",
+    "paths": [
+       "/usr/lib/dyld"
+      ],
+    "description": "Force reboot iOS by inducing a panic for funziez. Tweak by @skadz108",
+    "category": "Experimenatal"
   }
 ]
