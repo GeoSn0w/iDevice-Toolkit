@@ -1,6 +1,8 @@
 import SwiftUI
 import DeviceKit
 import Combine
+import UIKit
+import UniformTypeIdentifiers
 
 struct TweakPathForFile: Identifiable, Codable {
     var id: String { name }
@@ -31,11 +33,110 @@ struct TweakPathForFile: Identifiable, Codable {
     }
 }
 
+extension TweakPathForFile {
+    init(icon: String, name: String, paths: [String], description: String, category: TweakCategory) {
+        self.icon = icon
+        self.name = name
+        self.paths = paths
+        self.description = description
+        self.category = category
+    }
+}
+
 enum TweakCategory: String, Codable, CaseIterable {
     case aesthetics = "Aesthetics"
     case performance = "Performance"
     case privacy = "Privacy"
     case experimental = "Experimental"
+    case custom = "Custom Tweaks"
+}
+
+// Helper extensions
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+        
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
+    }
+}
+
+// File document type for the custom tweaks
+struct TweakDocument: FileDocument {
+    static var readableContentTypes: [UTType] { [UTType.json] }
+    
+    var tweak: TweakPathForFile
+    
+    init(tweak: TweakPathForFile) {
+        self.tweak = tweak
+    }
+    
+    init(configuration: ReadConfiguration) throws {
+        guard let data = configuration.file.regularFileContents,
+              let decodedTweak = try? JSONDecoder().decode(TweakPathForFile.self, from: data)
+        else {
+            throw CocoaError(.fileReadCorruptFile)
+        }
+        
+        self.tweak = decodedTweak
+    }
+    
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        let data = try JSONEncoder().encode(tweak)
+        return FileWrapper(regularFileWithContents: data)
+    }
+}
+
+// Share sheet for exporting tweaks
+struct ShareSheet: UIViewControllerRepresentable {
+    var items: [Any]
+    
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        return controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+}
+
+struct CustomTweaksCategoryButton: View {
+    @Binding var showCustomTweakCreator: Bool
+    
+    var body: some View {
+        Button(action: {
+            withAnimation {
+                showCustomTweakCreator = true
+            }
+        }) {
+            HStack {
+                Image(systemName: "plus.circle.fill")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(ToolkitColors.green)
+                    .frame(width: 26)
+                
+                Text("Create Custom Tweak")
+                    .font(.system(size: 16, weight: .semibold))
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.gray)
+                    .padding(.leading, 8)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(ToolkitColors.categoryHeaderBackground)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+        }
+    }
 }
 
 extension Array: @retroactive RawRepresentable where Element: Codable {
@@ -279,6 +380,7 @@ struct TweakCategoryView: View {
     @Binding var isExpanded: Bool
     @Binding var enabledTweakIds: [String]
     @Binding var hasEnabledTweaks: Bool
+    @ObservedObject var customTweakManager = CustomTweakManager.shared
     
     var body: some View {
         VStack(spacing: 0) {
@@ -335,14 +437,27 @@ struct TweakCategoryView: View {
     private var tweaksList: some View {
         VStack(spacing: 8) {
             ForEach(tweaks) { tweak in
-                TweakRowView(tweak: tweak, isEnabled: enabledTweakIds.contains(tweak.id)) {
-                    toggleTweak(tweak)
-                }
+                TweakRowView(
+                    tweak: tweak,
+                    isEnabled: enabledTweakIds.contains(tweak.id),
+                    toggleAction: { toggleTweak(tweak) },
+                    deleteAction: category == .custom ? { deleteTweak(tweak) } : nil,
+                    isCustomTweak: category == .custom
+                )
             }
         }
         .padding(.top, 8)
         .padding(.horizontal, 8)
         .transition(.opacity.combined(with: .scale(scale: 0.95, anchor: .top)))
+    }
+    
+    private func deleteTweak(_ tweak: TweakPathForFile) {
+        if enabledTweakIds.contains(tweak.id) {
+                enabledTweakIds.removeAll { $0 == tweak.id }
+                hasEnabledTweaks = !enabledTweakIds.isEmpty
+        }
+            
+        customTweakManager.deleteTweak(withID: tweak.id)
     }
     
     private func getCategoryIcon(_ category: TweakCategory) -> String {
@@ -351,6 +466,7 @@ struct TweakCategoryView: View {
         case .performance: return "bolt.fill"
         case .privacy: return "lock.shield.fill"
         case .experimental: return "atom"
+        case .custom: return "slider.horizontal.3"
         }
     }
     
@@ -369,42 +485,76 @@ struct TweakRowView: View {
     var tweak: TweakPathForFile
     var isEnabled: Bool
     var toggleAction: () -> Void
+    var deleteAction: (() -> Void)? = nil
+    var isCustomTweak: Bool = false
+    
     @State private var showDetails: Bool = false
+    @State private var showDeleteConfirmation = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             tweakButton
+            
             if showDetails {
                 detailsView
             }
+        }
+        .alert(isPresented: $showDeleteConfirmation) {
+            Alert(
+                title: Text("Delete Custom Tweak"),
+                message: Text("Are you sure you want to delete \"\(tweak.name)\"? This action cannot be undone."),
+                primaryButton: .destructive(Text("Delete")) {
+                    if let delete = deleteAction {
+                        delete()
+                    }
+                },
+                secondaryButton: .cancel()
+            )
         }
     }
     
     private var tweakButton: some View {
         Button(action: toggleAction) {
             HStack(spacing: 12) {
+                // Tweak icon
                 Image(systemName: tweak.icon)
                     .font(.system(size: 15))
                     .frame(width: 18)
                     .foregroundColor(isEnabled ? ToolkitColors.green : .white.opacity(0.7))
                 
+                // Tweak name
                 Text(tweak.name)
                     .font(.system(size: 15, weight: .medium))
                     .foregroundColor(.white)
                 
                 Spacer()
                 
-                Button(action: {
-                    withAnimation {
-                        showDetails.toggle()
+                HStack(spacing: 16) { // Increase spacing between buttons
+                    // Delete button - only for custom tweaks
+                    if isCustomTweak {
+                        Button(action: {
+                            showDeleteConfirmation = true
+                        }) {
+                            Image(systemName: "trash")
+                                .font(.system(size: 14))
+                                .foregroundColor(Color.red.opacity(0.8))
+                        }
                     }
-                }) {
-                    Image(systemName: "info.circle")
-                        .font(.system(size: 14))
-                        .foregroundColor(ToolkitColors.accent.opacity(0.7))
+                    
+                    // Info button
+                    Button(action: {
+                        withAnimation {
+                            showDetails.toggle()
+                        }
+                    }) {
+                        Image(systemName: "info.circle")
+                            .font(.system(size: 14))
+                            .foregroundColor(ToolkitColors.accent.opacity(0.7))
+                    }
                 }
                 .padding(.trailing, 8)
                 
+                // Toggle indicator
                 ZStack {
                     Circle()
                         .stroke(isEnabled ? ToolkitColors.green.opacity(0.9) : Color.gray.opacity(0.3), lineWidth: 1.5)
@@ -478,14 +628,22 @@ struct ContentView: View {
     @State private var hasEnabledTweaks: Bool = false
     @State private var showTerminalLog: Bool = false
     
+    @StateObject private var customTweakManager = CustomTweakManager.shared
+    @State private var showCustomTweakCreator: Bool = false
     @State private var cancellableStore = CancellableStore()
     
     private var enabledTweaks: [TweakPathForFile] {
-        tweaks.filter { tweak in enabledTweakIds.contains(tweak.id) }
+        let builtInTweaks = tweaks.filter { tweak in enabledTweakIds.contains(tweak.id) }
+        let enabledCustomTweaks = customTweakManager.customTweaks.filter { tweak in
+                enabledTweakIds.contains(tweak.id)
+        }
+        return builtInTweaks + enabledCustomTweaks
     }
     
     private var tweaksByCategory: [TweakCategory: [TweakPathForFile]] {
-        Dictionary(grouping: tweaks) { $0.category }
+        var categories = Dictionary(grouping: tweaks) { $0.category }
+        categories[.custom] = customTweakManager.customTweaks
+        return categories
     }
     
     // MARK: Body
@@ -502,7 +660,9 @@ struct ContentView: View {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     loadTweaks()
+                    customTweakManager.loadCustomTweaks()
                 }
+                
             }
             .overlay {
                 if updateService.showUpdateAlert {
@@ -511,6 +671,9 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showTerminalLog) {
                 iDeviceCentralTerminal()
+            }
+            .sheet(isPresented: $showCustomTweakCreator) {
+                CustomTweakCreatorView()
             }
     }
     
@@ -552,38 +715,38 @@ struct ContentView: View {
     }
     
     private func loadTweaks() {
-        isLoadingTweaks = true
-        tweakLoadError = nil
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            TweaksService.shared.loadTweaks()
-                .sink(
-                    receiveCompletion: { completion in
-                        DispatchQueue.main.async {
-                            self.isLoadingTweaks = false
-                            
-                            if case .failure(let error) = completion {
-                                iDeviceLogger("[!] Failed to load tweaks: \(error.localizedDescription)")
-                                self.tweakLoadError = error.localizedDescription
-                                print("[!] Failed to load tweaks: \(error.localizedDescription)")
-                                self.tweakLoadError = error.localizedDescription
+            isLoadingTweaks = true
+            tweakLoadError = nil
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                TweaksService.shared.loadTweaks()
+                    .sink(
+                        receiveCompletion: { completion in
+                            DispatchQueue.main.async {
+                                self.isLoadingTweaks = false
+                                
+                                if case .failure(let error) = completion {
+                                    iDeviceLogger("[!] Failed to load tweaks: \(error.localizedDescription)")
+                                    self.tweakLoadError = error.localizedDescription
+                                    print("[!] Failed to load tweaks: \(error.localizedDescription)")
+                                    self.tweakLoadError = error.localizedDescription
+                                }
                             }
-                        }
-                    },
-                    receiveValue: { loadedTweaks in
-                        DispatchQueue.main.async {
-                            self.tweaks = loadedTweaks
-                            print("[+] Successfully loaded \(loadedTweaks.count) tweaks")
-                            if !loadedTweaks.isEmpty {
-                                let categories = Dictionary(grouping: loadedTweaks) { $0.category }
-                                for (category, tweaks) in categories {
-                                    iDeviceLogger("   • \(category.rawValue): \(tweaks.count) tweaks")
+                        },
+                        receiveValue: { loadedTweaks in
+                            DispatchQueue.main.async {
+                                self.tweaks = loadedTweaks
+                                print("[+] Successfully loaded \(loadedTweaks.count) tweaks")
+                                if !loadedTweaks.isEmpty {
+                                    let categories = Dictionary(grouping: loadedTweaks) { $0.category }
+                                    for (category, tweaks) in categories {
+                                        iDeviceLogger("   • \(category.rawValue): \(tweaks.count) tweaks")
                                 }
                             }
                         }
                     }
                 )
-                .store(in: &self.cancellableStore.cancellables)
+            .store(in: &self.cancellableStore.cancellables)
         }
     }
     
@@ -813,11 +976,38 @@ struct ContentView: View {
                     .padding(.bottom, 8)
                 }
             }
+            
+            CustomTweaksCategoryButton(showCustomTweakCreator: $showCustomTweakCreator)
+                .padding(.bottom, 8)
+            
             revertTweaksInfoPanel
+                .padding(.bottom, 8)
+            
+            JailbreakNewsButton()
                 .padding(.bottom, 8)
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 100)
+    }
+    
+    private var customTweaksCategoryView: some View {
+            VStack(spacing: 0) {
+                CustomTweaksCategoryButton(showCustomTweakCreator: $showCustomTweakCreator)
+                
+                if !customTweakManager.customTweaks.isEmpty {
+                    TweakCategoryView(
+                        category: .custom,
+                        tweaks: customTweakManager.customTweaks,
+                        isExpanded: .init(
+                            get: { categoryExpanded[.custom] ?? false },
+                            set: { categoryExpanded[.custom] = $0 }
+                        ),
+                        enabledTweakIds: $enabledTweakIds,
+                        hasEnabledTweaks: $hasEnabledTweaks
+                    )
+                .padding(.top, 8)
+            }
+        }
     }
     
     private var revertTweaksInfoPanel: some View {
@@ -849,19 +1039,42 @@ struct ContentView: View {
         )
     }
     
-    private func applyButtonView(scrollProxy: ScrollViewProxy) -> some View {
-        VStack(spacing: 12) {
-            ToolkitButton(
-                icon: "newspaper.fill",
-                text: "iOS Jailbreak News",
-                disabled: false
-            ) {
+    struct JailbreakNewsButton: View {
+        var body: some View {
+            Button(action: {
                 if let url = URL(string: "https://idevicecentral.com") {
                     UIApplication.shared.open(url)
                 }
+            }) {
+                HStack {
+                    Image(systemName: "newspaper.fill")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(ToolkitColors.green)
+                        .frame(width: 26)
+                    
+                    Text("iOS Jailbreak News")
+                        .font(.system(size: 16, weight: .semibold))
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.gray)
+                        .padding(.leading, 8)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 14)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(ToolkitColors.categoryHeaderBackground)
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 16))
             }
-            .padding(.horizontal, 16)
-            
+        }
+    }
+    
+    private func applyButtonView(scrollProxy: ScrollViewProxy) -> some View {
+        VStack(spacing: 12) {
             ToolkitButton(
                 icon: tweaksAppliedSuccessfully ? "arrow.clockwise" : "bolt.fill",
                 text: tweaksAppliedSuccessfully ? "Respring to apply" :
