@@ -62,6 +62,15 @@
     "category": "Aesthetics"
   },
   {
+    "icon": "face.dashed.fill",
+    "name": "Fully Disable Emojis",
+    "paths": [
+      "/System/Library/Fonts/CoreAddition/AppleColorEmoji-160px.ttc"
+    ],
+    "description": "Completely disable all emojis. Tweak by GeoSn0w.",
+    "category": "Aesthetics"
+  },
+  {
     "icon": "eye.slash.fill",
     "name": "Kill Camera Shutter Sound",
     "paths": [
