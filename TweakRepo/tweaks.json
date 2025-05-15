@@ -69,10 +69,10 @@
       "/System/Library/Fonts/Core/SFUI.ttf",
       "/System/Library/Fonts/Core/SFUIMono.ttf",
       "/System/Library/Fonts/Core/SFUIMonoItalic.ttf",
-      "/System/Library/Fonts/CoreUI/SFUIItalic.ttf",
       "/System/Library/Fonts/CoreUI/SFUI.ttf",
-      "/System/Library/Fonts/CoreUI/SFUIMono.ttf",
-      "/System/Library/Fonts/CoreUI/SFUIMonoItalic.ttf"
+      "/System/Library/Fonts/CoreUI/SFUIItalic.ttf",
+      "/System/Library/Fonts/CoreUI/SFUIRounded.ttf",
+      "/System/Library/Fonts/CoreUI/SFUISoft.ttf"
     ],
     "description": "Completely switch the UI to the Helvetica font. Tweak by GeoSn0w. I've seen the idea in the jailbreak.party discord.",
     "category": "Aesthetics"
