@@ -62,6 +62,15 @@
     "category": "Aesthetics"
   },
   {
+    "icon": "textformat",
+    "name": "Switch to Helvetica Font",
+    "paths": [
+      "/System/Library/Fonts/CoreAddition/AppleColorEmoji-160px.ttc"
+    ],
+    "description": "Completely switch the UI to the Helvetica font. Tweak by GeoSn0w. I've seen the idea in the jailbreak.party discord.",
+    "category": "Aesthetics"
+  },
+  {
     "icon": "face.dashed.fill",
     "name": "Fully Disable Emojis",
     "paths": [
