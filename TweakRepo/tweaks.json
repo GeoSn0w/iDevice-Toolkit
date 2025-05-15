@@ -65,7 +65,7 @@
     "icon": "textformat",
     "name": "Switch to Helvetica Font",
     "paths": [
-      "/System/Library/Fonts/CoreAddition/AppleColorEmoji-160px.ttc"
+      "/System/Library/Fonts/Core/SFUI.ttf"
     ],
     "description": "Completely switch the UI to the Helvetica font. Tweak by GeoSn0w. I've seen the idea in the jailbreak.party discord.",
     "category": "Aesthetics"
