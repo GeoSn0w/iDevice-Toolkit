@@ -1,15 +1,13 @@
 {
-  "latestVersion": "1.4.0",
+  "latestVersion": "1.5.0",
   "minCompatibleVersion": "1.0.0",
-  "releaseDate": "May 13, 2025",
+  "releaseDate": "May 16, 2025",
   "downloadURL": "https://idevicecentral.com/tweaks/idevice-toolkit-ipa-download/",
   "releaseNotes": [
     "This is a BIG update!",
-    "You can now create your own custom tweaks and run them.",
-    "You can share the tweaks you make.",
-    "You can browse the file system using the built-in File Manager and select files to use in your own tweaks.",
-    "Cleaned up the UI a bit",
-    "Added some more tweaks"
+    "There is now a File Manager in the app. You can access it via the folder icon in the top-right corner near the terminal. It can browse the paths available in jailed mode (/System, /Developer, etc.), it can play audio files (good for tweak development so you can disable sounds, etc.)",
+    "The Terminal now includes a Dismiss Terminal button at the bottom to close it more easily.",
+    "Fixed some extra bugs."
   ],
   "criticalUpdate": true
 }
