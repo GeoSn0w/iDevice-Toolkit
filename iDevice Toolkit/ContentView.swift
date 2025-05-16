@@ -627,6 +627,7 @@ struct ContentView: View {
     @State private var tweakLoadError: String? = nil
     @State private var hasEnabledTweaks: Bool = false
     @State private var showTerminalLog: Bool = false
+    @State public var showFileManager: Bool = false
     
     @StateObject private var customTweakManager = CustomTweakManager.shared
     @State private var showCustomTweakCreator: Bool = false
@@ -674,6 +675,9 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showCustomTweakCreator) {
                 CustomTweakCreatorView()
+            }
+            .sheet(isPresented: $showFileManager) {
+                SystemFileManagerView()
             }
     }
     
@@ -873,16 +877,15 @@ struct ContentView: View {
             .padding(.trailing, 8)
             
             Button(action: {
-                updateService.checkForUpdates()
+                withAnimation {
+                    showFileManager.toggle()
+                }
             }) {
-                Image(systemName: "arrow.triangle.2.circlepath")
+                Image(systemName: "folder")
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(ToolkitColors.accent.opacity(0.9))
-                    .rotationEffect(.degrees(updateService.isCheckingForUpdates ? 360 : 0))
-                    .animation(updateService.isCheckingForUpdates ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default, value: updateService.isCheckingForUpdates)
             }
-            .disabled(updateService.isCheckingForUpdates)
-            .padding(.leading, 8)
+            .padding(.trailing, 8)
             
         }
         .padding(.horizontal, 22)

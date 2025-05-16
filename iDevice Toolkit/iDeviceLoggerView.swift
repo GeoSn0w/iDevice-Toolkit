@@ -21,7 +21,7 @@ struct iDeviceCentralTerminal: View {
         ZStack {
             terminalBackground.edgesIgnoringSafeArea(.all)
             
-            VStack(spacing: 0) {
+            VStack() {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(alignment: .leading, spacing: 2) {
@@ -52,6 +52,24 @@ struct iDeviceCentralTerminal: View {
                         }
                     }
                 }
+                
+                Button(action: {
+                    dismiss()
+                }) {
+                    Text("Dismiss Terminal")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.white)
+                        .padding(.vertical, 12)
+                        .frame(maxWidth: .infinity)
+                        .background(ToolkitColors.background)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.white, lineWidth: 1)
+                        )
+                        .cornerRadius(8)
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 16)
             }
         }
     }

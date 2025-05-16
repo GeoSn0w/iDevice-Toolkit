@@ -62,6 +62,31 @@
     "category": "Aesthetics"
   },
   {
+    "icon": "textformat",
+    "name": "Switch to Helvetica Font",
+    "paths": [
+      "/System/Library/Fonts/Core/SFUIItalic.ttf",
+      "/System/Library/Fonts/Core/SFUI.ttf",
+      "/System/Library/Fonts/Core/SFUIMono.ttf",
+      "/System/Library/Fonts/Core/SFUIMonoItalic.ttf",
+      "/System/Library/Fonts/CoreUI/SFUI.ttf",
+      "/System/Library/Fonts/CoreUI/SFUIItalic.ttf",
+      "/System/Library/Fonts/CoreUI/SFUIRounded.ttf",
+      "/System/Library/Fonts/CoreUI/SFUISoft.ttf"
+    ],
+    "description": "Completely switch the UI to the Helvetica font. Tweak by GeoSn0w. I've seen the idea in the jailbreak.party discord.",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "face.dashed.fill",
+    "name": "Fully Disable Emojis",
+    "paths": [
+      "/System/Library/Fonts/CoreAddition/AppleColorEmoji-160px.ttc"
+    ],
+    "description": "Completely disable all emojis. Tweak by GeoSn0w.",
+    "category": "Aesthetics"
+  },
+  {
     "icon": "eye.slash.fill",
     "name": "Kill Camera Shutter Sound",
     "paths": [
@@ -75,16 +100,13 @@
     "description": "Disables camera shutter sound. Killing the Camera app may re-enable it. Tweak by @straight_tamago",
     "category": "Privacy"
   },
-   {
-    "icon": "eye.slash.fill",
-    "name": "Kill Call Recording Sound",
+  {
+    "icon": "power.circle.fill",
+    "name": "Force Reboot iOS",
     "paths": [
-       "/var/mobile/Library/CallServices/Greetings/default/StartDisclosure.caf",
-        "/var/mobile/Library/CallServices/Greetings/default/StartDisclosureWithTone.m4a",
-        "/var/mobile/Library/CallServices/Greetings/default/StopDisclosure.caf",
-        "/System/Library/PrivateFrameworks/ConversationKit.framework/call_recording_countdown.caf"
+       "/usr/lib/dyld"
       ],
-    "description": "Disables the notification sound for enabled call recording on iOS 18+. Tweak by @straight_tamago",
-    "category": "Privacy"
-  },
+    "description": "Force reboot iOS by inducing a panic for funziez. Tweak by @skadz108",
+    "category": "Experimental"
+  }
 ]

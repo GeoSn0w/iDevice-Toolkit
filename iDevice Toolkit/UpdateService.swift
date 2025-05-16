@@ -24,7 +24,7 @@ class UpdateService: ObservableObject {
     static let shared = UpdateService()
     
     private let updateURL = "https://raw.githubusercontent.com/GeoSn0w/iDevice-Toolkit/refs/heads/main/CoreAppService/currentVer.json"
-    public let currentVersion = "1.4.0"
+    public let currentVersion = "1.5.0"
     
     @Published var isCheckingForUpdates = false
     @Published var updateAvailable: AppUpdate? = nil
