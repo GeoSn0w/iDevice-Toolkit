@@ -1,55 +1,55 @@
 [
   {
     "icon": "dock.rectangle",
-    "name": "Hide the Dock",
+    "name": "隐藏 Dock 栏",
     "paths": [
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/dockDark.materialrecipe",
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/dockLight.materialrecipe"
     ],
-    "description": "Completely remove the dock background from your home screen. Tweak by @Skadz108.",
-    "category": "Aesthetics"
+    "description": "完全移除主屏幕的 Dock 栏背景。作者：@Skadz108。",
+    "category": "美学"
   },
   {
     "icon": "line.3.horizontal",
-    "name": "Hide the Home Bar",
+    "name": "隐藏主页指示栏",
     "paths": [
       "/System/Library/PrivateFrameworks/MaterialKit.framework/Assets.car"
     ],
-    "description": "Remove the bottom home indicator bar. Tweak by @Skadz108.",
-    "category": "Aesthetics"
+    "description": "移除底部主页指示条。作者：@Skadz108。",
+    "category": "美学"
   },
   {
     "icon": "folder",
-    "name": "Hide Folder Backgrounds",
+    "name": "隐藏文件夹背景",
     "paths": [
       "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderDark.materialrecipe",
       "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderLight.materialrecipe"
     ],
-    "description": "Make app folders completely transparent. Tweak by @Skadz108.",
-    "category": "Aesthetics"
+    "description": "使应用文件夹完全透明。作者：@Skadz108。",
+    "category": "美学"
   },
   {
     "icon": "lock.iphone",
-    "name": "Hide Unlock Background",
+    "name": "隐藏解锁背景",
     "paths": [
       "/System/Library/PrivateFrameworks/CoverSheet.framework/dashBoardPasscodeBackground.materialrecipe"
     ],
-    "description": "Remove the passcode entry background on the lock screen",
-    "category": "Aesthetics"
+    "description": "移除锁屏面容 ID 输入时的背景。作者：@Skadz108。",
+    "category": "美学"
   },
   {
     "icon": "bubble.left",
-    "name": "Clean Message Bubbles",
+    "name": "简化消息气泡",
     "paths": [
       "/System/Library/PrivateFrameworks/ChatKit.framework/bubbleDark.materialrecipe",
       "/System/Library/PrivateFrameworks/ChatKit.framework/bubbleLight.materialrecipe"
     ],
-    "description": "Simplify the look of chat bubbles in Messages",
-    "category": "Experimental"
+    "description": "简化信息应用中聊天气泡的外观。",
+    "category": "实验性"
   },
   {
     "icon": "square.stack.3d.forward.dottedline",
-    "name": "Transparent Player & Notis",
+    "name": "透明播放器与通知",
     "paths": [
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeLight.visualstyleset",
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeDark.visualstyleset",
@@ -58,12 +58,12 @@
       "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderDark.materialrecipe",
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/platters.materialrecipe"
     ],
-    "description": "Transparent Media Player & Notifications. Tweak by @straight_tamago / mdc0",
-    "category": "Aesthetics"
+    "description": "透明的媒体播放器和通知样式。作者：@straight_tamago / mdc0",
+    "category": "美学"
   },
   {
     "icon": "textformat",
-    "name": "Switch to Helvetica Font",
+    "name": "切换至 Helvetica 字体",
     "paths": [
       "/System/Library/Fonts/Core/SFUIItalic.ttf",
       "/System/Library/Fonts/Core/SFUI.ttf",
@@ -74,21 +74,21 @@
       "/System/Library/Fonts/CoreUI/SFUIRounded.ttf",
       "/System/Library/Fonts/CoreUI/SFUISoft.ttf"
     ],
-    "description": "Completely switch the UI to the Helvetica font. Tweak by GeoSn0w. I've seen the idea in the jailbreak.party discord.",
-    "category": "Aesthetics"
+    "description": "将系统界面字体完全替换为 Helvetica。作者：GeoSn0w（灵感源自 jailbreak.party Discord 社区）",
+    "category": "美学"
   },
   {
     "icon": "face.dashed.fill",
-    "name": "Fully Disable Emojis",
+    "name": "完全禁用表情符号",
     "paths": [
       "/System/Library/Fonts/CoreAddition/AppleColorEmoji-160px.ttc"
     ],
-    "description": "Completely disable all emojis. Tweak by GeoSn0w.",
-    "category": "Aesthetics"
+    "description": "彻底禁用所有表情符号。作者：GeoSn0w",
+    "category": "美学"
   },
   {
     "icon": "eye.slash.fill",
-    "name": "Kill Camera Shutter Sound",
+    "name": "禁用相机快门声",
     "paths": [
        "/System/Library/Audio/UISounds/photoShutter.caf",
               "/System/Library/Audio/UISounds/begin_record.caf",
@@ -97,16 +97,16 @@
               "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_begin.caf",
               "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf"
       ],
-    "description": "Disables camera shutter sound. Killing the Camera app may re-enable it. Tweak by @straight_tamago",
-    "category": "Privacy"
+    "description": "禁用相机快门声（关闭相机应用可能重新启用）。作者：@straight_tamago",
+    "category": "隐私"
   },
   {
     "icon": "power.circle.fill",
-    "name": "Force Reboot iOS",
+    "name": "强制重启 iOS",
     "paths": [
        "/usr/lib/dyld"
       ],
-    "description": "Force reboot iOS by inducing a panic for funziez. Tweak by @skadz108",
-    "category": "Experimental"
+    "description": "通过触发内核恐慌强制重启设备（仅供测试使用）。作者：@skadz108",
+    "category": "实验性"
   }
 ]
