@@ -88,6 +88,15 @@
   },
   {
     "icon": "eye.slash.fill",
+    "name": "Disable CC Blur",
+    "paths": [
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/modulesBackground.materialrecipe"
+    ],
+    "description": "Completely disable the Control Center blur.",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "eye.slash.fill",
     "name": "Kill Camera Shutter Sound",
     "paths": [
        "/System/Library/Audio/UISounds/photoShutter.caf",
