@@ -1,13 +1,12 @@
 {
-  "latestVersion": "1.5.0",
+  "latestVersion": "1.6.0",
   "minCompatibleVersion": "1.0.0",
-  "releaseDate": "May 16, 2025",
+  "releaseDate": "May 23, 2025",
   "downloadURL": "https://idevicecentral.com/tweaks/idevice-toolkit-ipa-download/",
   "releaseNotes": [
     "This is a BIG update!",
-    "There is now a File Manager in the app. You can access it via the folder icon in the top-right corner near the terminal. It can browse the paths available in jailed mode (/System, /Developer, etc.), it can play audio files (good for tweak development so you can disable sounds, etc.)",
-    "The Terminal now includes a Dismiss Terminal button at the bottom to close it more easily.",
-    "Fixed some extra bugs."
+    "You can now inject real iOS Jailbreak tweaks (DYLIB / Framework) into IPA applications. Just specify the IPA file and the tweak, and the tool will combine them and give you an IPA you can either sign with AltStore / Sideloadly / ESIGN, etc., or install via TrollStore (where available). This module works on iOS 16.0 - iOS 18.5 on all devices. Use responsibly. iDevice Central never has and never will condone piracy!",
+    "Fixed some UI bugs."
   ],
   "criticalUpdate": true
 }
