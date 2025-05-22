@@ -3,7 +3,7 @@
 A powerful iOS tweaking and customization tool for iOS 16.0 – 18.3.2, powered by CVE-2025-24203.  
 Developed by [iDevice Central](https://idevicecentral.com).
 
-<a href="https://idevicecentral.com/tweaks/idevice-toolkit-ipa-download/">Check out the release article / guide for iDevice Toolkit</a>
+<a href="https://idevicecentral.com/tweaks/idevice-toolkit-ipa-download/">Check out the official release article / guide for iDevice Toolkit</a>
 
 ---
 
@@ -26,6 +26,7 @@ Developed by [iDevice Central](https://idevicecentral.com).
 - 📷 **Disable Camera Shutter Sound**
 - 📞 **Disable Call Recording Notification Sound** *(iOS 18+)*
 - ⚙️ **Make your own Tweaks directly from the app!**
+- 📦 **Inject jailbreak tweaks (DYLIB/Framework) into IPA files.** *(iOS 18.5 and lower)* **Use responsibly!**
 - More to come!
 
 ---
@@ -41,6 +42,8 @@ You can install **iDevice Toolkit** using any of the following tools:
 - [TrollStore](https://idevicecentral.com/jailbreak-tools/how-to-install-trollstore-on-ios-17-using-trollrestore/) *(Recommended if compatible)*
 
 After installation, simply launch the app and apply your desired tweaks. Tweaks run in RAM, so if something goes wrong, just reboot the device and they will be disabled.
+
+**Use Responsibly! iDevice Central does not condone piracy! This app is provided "as-is" with no guarantees. You are responsible for your actions and any damage that may occur from using the app.**
 
 ---
 
