@@ -30,7 +30,7 @@
   },
   {
     "icon": "minus.square.fill",
-    "name": "Hide Notifs & Widget Background",
+    "name": "Hide Notifs & Widget BG",
     "paths": [
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeLight.visualstyleset",
       "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeDark.visualstyleset",
