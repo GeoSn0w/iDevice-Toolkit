@@ -63,7 +63,7 @@
     "category": "Aesthetics"
   },
    {
-    "icon": "text.page.badge.magnifyingglass",
+    "icon": "doc.text.magnifyingglass",
     "name": "Hide Spotlight Background",
     "paths": [
       "/System/Library/PrivateFrameworks/SpringBoardHome.framework/knowledgeBackgroundDarkZoomed.descendantrecipe",
@@ -73,7 +73,7 @@
     "category": "Aesthetics"
   },
    {
-    "icon": "battery.100percent",
+    "icon": "battery.100",
     "name": "Hide Large Battery Icon",
     "paths": [
       "/System/Library/PrivateFrameworks/CoverSheet.framework/Assets.car"
@@ -193,7 +193,7 @@
     "category": "Audio"
   },
   {
-    "icon": "battery.0percent",
+    "icon": "battery.0",
     "name": "Disable Low Battery Sound",
     "paths": [
        "/System/Library/Audio/UISounds/low_power.caf"
@@ -202,7 +202,7 @@
     "category": "Audio"
   },
   {
-    "icon": "powerplug.portrait.fill",
+    "icon": "powerplug",
     "name": "Disable Charge Sound",
     "paths": [
        "/System/Library/Audio/UISounds/connect_power.caf"
