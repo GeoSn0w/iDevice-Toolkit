@@ -29,6 +29,77 @@
     "category": "Aesthetics"
   },
   {
+    "icon": "minus.square.fill",
+    "name": "Hide Notifs & Widget Background",
+    "paths": [
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeLight.visualstyleset",
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeDark.visualstyleset",
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/plattersDark.materialrecipe",
+      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platters.materialrecipe"
+    ],
+    "description": "Removes notifications and widget backgrounds. Tweak by jailbreak.party.",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "lock.open.fill",
+    "name": "Hide Passcode Background",
+    "paths": [
+      "/System/Library/PrivateFrameworks/CoverSheet.framework/dashBoardPasscodeBackground.materialrecipe"
+    ],
+    "description": "Hide the passcode screen background. Tweak by jailbreak.party.",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "lock.open.fill",
+    "name": "Hide Lock Icon",
+    "paths": [
+      "/System/Library/PrivateFrameworks/SpringBoardUIServices.framework/lock@2x-812h.ca/main.caml",
+      "/System/Library/PrivateFrameworks/SpringBoardUIServices.framework/lock@2x-896h.ca/main.caml",
+      "/System/Library/PrivateFrameworks/SpringBoardUIServices.framework/lock@3x-812h.ca/main.caml",
+      "/System/Library/PrivateFrameworks/SpringBoardUIServices.framework/lock@3x-896h.ca/main.caml",
+      "/System/Library/PrivateFrameworks/SpringBoardUIServices.framework/lock@3x-d73.ca/main.caml"
+    ],
+    "description": "Hide the Lock icon. Tweak by jailbreak.party.",
+    "category": "Aesthetics"
+  },
+   {
+    "icon": "text.page.badge.magnifyingglass",
+    "name": "Hide Spotlight Background",
+    "paths": [
+      "/System/Library/PrivateFrameworks/SpringBoardHome.framework/knowledgeBackgroundDarkZoomed.descendantrecipe",
+      "/System/Library/PrivateFrameworks/SpringBoardHome.framework/knowledgeBackgroundZoomed.descendantrecipe"
+    ],
+    "description": "Hide the Spotlight Background. Tweak by jailbreak.party.",
+    "category": "Aesthetics"
+  },
+   {
+    "icon": "battery.100percent",
+    "name": "Hide Large Battery Icon",
+    "paths": [
+      "/System/Library/PrivateFrameworks/CoverSheet.framework/Assets.car"
+    ],
+    "description": "Hide the Large Battery Icon. Tweak by jailbreak.party.",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "sun.max",
+    "name": "Disable Brightness Icon",
+    "paths": [
+      "/System/Library/ControlCenter/Bundles/DisplayModule.bundle/Brightness.ca/main.caml"
+    ],
+    "description": "Disable Brightness Icon. Tweak by jailbreak.party.",
+    "category": "Aesthetics"
+  },
+  {
+    "icon": "moon.fill",
+    "name": "Disable Do Not Disturb Icon",
+    "paths": [
+      "/System/Library/PrivateFrameworks/FocusUI.framework/dnd_cg_02.ca/main.caml"
+    ],
+    "description": "Disable Do Not Disturb Icon. Tweak by jailbreak.party.",
+    "category": "Aesthetics"
+  },
+  {
     "icon": "lock.iphone",
     "name": "Hide Unlock Background",
     "paths": [
@@ -38,14 +109,13 @@
     "category": "Aesthetics"
   },
   {
-    "icon": "bubble.left",
-    "name": "Clean Message Bubbles",
+    "icon": "apps.iphone",
+    "name": "Hide App Library Background",
     "paths": [
-      "/System/Library/PrivateFrameworks/ChatKit.framework/bubbleDark.materialrecipe",
-      "/System/Library/PrivateFrameworks/ChatKit.framework/bubbleLight.materialrecipe"
+      "/System/Library/PrivateFrameworks/SpringBoardHome.framework/coplanarLeadingTrailingBackgroundBlur.materialrecipe"
     ],
-    "description": "Simplify the look of chat bubbles in Messages",
-    "category": "Experimental"
+    "description": "Hide App Library Background. Tweak by jailbreak.party.",
+    "category": "Aesthetics"
   },
   {
     "icon": "square.stack.3d.forward.dottedline",
@@ -65,14 +135,8 @@
     "icon": "textformat",
     "name": "Switch to Helvetica Font",
     "paths": [
-      "/System/Library/Fonts/Core/SFUIItalic.ttf",
       "/System/Library/Fonts/Core/SFUI.ttf",
-      "/System/Library/Fonts/Core/SFUIMono.ttf",
-      "/System/Library/Fonts/Core/SFUIMonoItalic.ttf",
-      "/System/Library/Fonts/CoreUI/SFUI.ttf",
-      "/System/Library/Fonts/CoreUI/SFUIItalic.ttf",
-      "/System/Library/Fonts/CoreUI/SFUIRounded.ttf",
-      "/System/Library/Fonts/CoreUI/SFUISoft.ttf"
+      "/System/Library/Fonts/CoreUI/SFUI.ttf"
     ],
     "description": "Completely switch the UI to the Helvetica font. Tweak by GeoSn0w. I've seen the idea in the jailbreak.party discord.",
     "category": "Aesthetics"
@@ -106,7 +170,7 @@
               "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_begin.caf",
               "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf"
       ],
-    "description": "Disables camera shutter sound. Killing the Camera app may re-enable it. Tweak by @straight_tamago",
+    "description": "WARNING! May NOT be legal in all countries! It's your responsibility to check before use! Disables camera shutter sound. Killing the Camera app may re-enable it. Tweak by @straight_tamago",
     "category": "Privacy"
   },
   {
@@ -117,5 +181,42 @@
       ],
     "description": "Force reboot iOS by inducing a panic for funziez. Tweak by @skadz108",
     "category": "Experimental"
+  },
+  {
+    "icon": "creditcard.fill",
+    "name": "Disable Payment Sounds",
+    "paths": [
+       "/System/Library/Audio/UISounds/payment_success.caf",
+       "/System/Library/Audio/UISounds/payment_failure.caf"
+      ],
+    "description": "Disables the payment / Apple Pay sounds. Tweak by jailbreak.party.",
+    "category": "Audio"
+  },
+  {
+    "icon": "battery.0percent",
+    "name": "Disable Low Battery Sound",
+    "paths": [
+       "/System/Library/Audio/UISounds/low_power.caf"
+      ],
+    "description": "Disables the Low Battery Sound. Tweak by jailbreak.party.",
+    "category": "Audio"
+  },
+  {
+    "icon": "powerplug.portrait.fill",
+    "name": "Disable Charge Sound",
+    "paths": [
+       "/System/Library/Audio/UISounds/connect_power.caf"
+      ],
+    "description": "Disables the Charging Sound. Tweak by jailbreak.party.",
+    "category": "Audio"
+  },
+  {
+    "icon": "dot.radiowaves.left.and.right",
+    "name": "Disable AirDrop Sound",
+    "paths": [
+       "/System/Library/Audio/UISounds/Modern/airdrop_invite.cat"
+      ],
+    "description": "Disables the Charging Sound. Tweak by jailbreak.party.",
+    "category": "Audio"
   }
 ]
