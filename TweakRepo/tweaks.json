@@ -160,8 +160,8 @@
     "category": "Aesthetics"
   },
   {
-    "icon": "eye.slash.fill",
-    "name": "Kill Camera Shutter Sound",
+    "icon": "waveform.circle",
+    "name": "Disable Call Recording Sound",
     "paths": [
        "/System/Library/Audio/UISounds/photoShutter.caf",
               "/System/Library/Audio/UISounds/begin_record.caf",
@@ -169,6 +169,18 @@
               "/System/Library/Audio/UISounds/Modern/camera_shutter_burst.caf",
               "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_begin.caf",
               "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf"
+      ],
+    "description": "WARNING! May NOT be legal in all countries! It's your responsibility to check before use! Disable Call Recording Sound. REQUIRES Location Services to be ON so that it can run in the background and keep re-enabling the tweak every 60 seconds automatically. Tweak by mdc0.",
+    "category": "Privacy"
+  },
+  {
+    "icon": "eye.slash.fill",
+    "name": "Kill Camera Shutter Sound",
+    "paths": [
+        "/var/mobile/Library/CallServices/Greetings/default/StartDisclosure.caf",
+        "/var/mobile/Library/CallServices/Greetings/default/StartDisclosureWithTone.m4a",
+        "/var/mobile/Library/CallServices/Greetings/default/StopDisclosure.caf",
+        "/System/Library/PrivateFrameworks/ConversationKit.framework/call_recording_countdown.caf"
       ],
     "description": "WARNING! May NOT be legal in all countries! It's your responsibility to check before use! Disables camera shutter sound. Killing the Camera app may re-enable it. Tweak by @straight_tamago",
     "category": "Privacy"
