@@ -1,14 +1,14 @@
 {
-  "latestVersion": "1.7.0",
+  "latestVersion": "1.8.0",
   "minCompatibleVersion": "1.0.0",
-  "releaseDate": "May 24, 2025",
+  "releaseDate": "June 4th, 2025",
   "downloadURL": "https://idevicecentral.com/tweaks/idevice-toolkit-ipa-download/",
   "releaseNotes": [
     "This is a BIG update!",
-    "A bug was fixed that caused the IPA files to not be selectable in File Picker. This was because of ESIGN / Gbox and other such signers messing up the entitlements of iDevice ToolKit when signing. Proper signing tools like Sideloadly, AltStore, etc. worked fine.",
-    "The issue has been fixed through a workaround in iDevice ToolKit, so it should work now, but the bug in ESIGN, etc. not copying the entitlements properly remains and should be addressed by those developers.",
-    "You can now inject real iOS Jailbreak tweaks (DYLIB / Framework) into IPA applications. Just specify the IPA file and the tweak, and the tool will combine them and give you an IPA you can either sign with AltStore / Sideloadly / ESIGN, etc., or install via TrollStore (where available). This module works on iOS 16.0 - iOS 18.5 on all devices. Use responsibly. iDevice Central never has and never will condone piracy!",
-    "Fixed some UI bugs."
+    "Added MANY new tweaks, including audio tweaks, aesthetic tweaks etc, thanks to jailbreak.party!",
+    "Fixed the -- Disable Call Recording Notification -- tweak thanks to mdc0 dev! WARNING! This tweak MAY NOT be legal in all countries. It's YOUR responsibility to check before using! Don't do shady things. Use responsibly and in accordance with the law!",
+    "Added background monitoring to keep re-enabling tweaks that may require periodic re-apply. This requires location services (Always allow) and notifications to remain active in the background. No actual location data is fetched. (Trick from AltStore)",
+    "Fixed several bugs."
   ],
   "criticalUpdate": true
 }
