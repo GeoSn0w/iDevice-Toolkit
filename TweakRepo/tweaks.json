@@ -171,7 +171,10 @@
               "/System/Library/Audio/UISounds/Modern/camera_shutter_burst_end.caf"
       ],
     "description": "WARNING! May NOT be legal in all countries! It's your responsibility to check before use! Disable Call Recording Sound. REQUIRES Location Services to be ON so that it can run in the background and keep re-enabling the tweak every 60 seconds automatically. Tweak by mdc0.",
-    "category": "Privacy"
+    "category": "Privacy",
+    "requiresBackgroundTimer": true,
+    "timerInterval": 60,
+    "requiresLocationServices": true
   },
   {
     "icon": "eye.slash.fill",
