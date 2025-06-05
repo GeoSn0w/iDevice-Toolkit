@@ -100,15 +100,6 @@
     "category": "Aesthetics"
   },
   {
-    "icon": "lock.iphone",
-    "name": "Hide Unlock Background",
-    "paths": [
-      "/System/Library/PrivateFrameworks/CoverSheet.framework/dashBoardPasscodeBackground.materialrecipe"
-    ],
-    "description": "Remove the passcode entry background on the lock screen",
-    "category": "Aesthetics"
-  },
-  {
     "icon": "apps.iphone",
     "name": "Hide App Library Background",
     "paths": [
@@ -119,14 +110,10 @@
   },
   {
     "icon": "square.stack.3d.forward.dottedline",
-    "name": "Transparent Player & Notis",
+    "name": "Transparent Player",
     "paths": [
-      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeLight.visualstyleset",
-      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platterStrokeDark.visualstyleset",
-      "/System/Library/PrivateFrameworks/CoreMaterial.framework/plattersDark.materialrecipe",
       "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderLight.materialrecipe",
-      "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderDark.materialrecipe",
-      "/System/Library/PrivateFrameworks/CoreMaterial.framework/platters.materialrecipe"
+      "/System/Library/PrivateFrameworks/SpringBoardHome.framework/folderDark.materialrecipe"
     ],
     "description": "Transparent Media Player & Notifications. Tweak by @straight_tamago / mdc0",
     "category": "Aesthetics"
