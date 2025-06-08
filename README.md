@@ -35,7 +35,7 @@ Developed by [iDevice Central](https://idevicecentral.com).
 
 You can install **iDevice Toolkit** using any of the following tools:
 
-- Sideloadly]
+- Sideloadly
 - AltStore
 - ESign
 - [FlekSt0re](https://idevicecentral.com/ios-guide/how-to-get-tweaked-apps-using-flekst0re-on-ios-17/)
