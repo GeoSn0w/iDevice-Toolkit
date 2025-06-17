@@ -1,6 +1,6 @@
 # 📱 iDevice Toolkit
 
-A powerful iOS tweaking and customization tool for iOS 16.0 – 18.3.2, powered by CVE-2025-24203, and iOS 16.0 - 18.5 for File Manager and IPA Tweak Injection.  
+A powerful iOS tweaking and customization tool for iOS 16.0 – 18.3.2, powered by CVE-2025-24203, and iOS 16.0 - 18.5 and iOS 26 Beta for File Manager and IPA Tweak Injection.  
 Developed by [iDevice Central](https://idevicecentral.com).
 
 <a href="https://idevicecentral.com/tweaks/idevice-toolkit-ipa-download/">Check out the official release article / guide for iDevice Toolkit</a>
@@ -12,7 +12,7 @@ Developed by [iDevice Central](https://idevicecentral.com).
 **iDevice Toolkit** is a user-friendly iOS customization utility based on [CVE-2025-24203](https://project-zero.issues.chromium.org/issues/391518636), a powerful exploit by Ian Beer of Google Project Zero. This app enables system-level tweaks **without a jailbreak**, and works on **all devices** running:
 
 - ✅ iOS 16.0 – iOS 18.3.2 for built-in tweaks using CVE-2025-24203.
-- ✅ iOS 16.0 - 18.5 for File Manager and IPA Tweak Injector only.
+- ✅ iOS 16.0 - 18.5 and iOS 26 Beta for File Manager and IPA Tweak Injector only.
 
 ---
 
