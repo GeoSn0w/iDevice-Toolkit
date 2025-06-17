@@ -1,14 +1,13 @@
 {
-  "latestVersion": "1.8.0",
+  "latestVersion": "1.9.0",
   "minCompatibleVersion": "1.0.0",
-  "releaseDate": "June 4th, 2025",
+  "releaseDate": "June 18th, 2025",
   "downloadURL": "https://idevicecentral.com/tweaks/idevice-toolkit-ipa-download/",
   "releaseNotes": [
     "This is a BIG update!",
-    "Added MANY new tweaks, including audio tweaks, aesthetic tweaks etc, thanks to jailbreak.party!",
-    "Fixed the -- Disable Call Recording Notification -- tweak thanks to mdc0 dev! WARNING! This tweak MAY NOT be legal in all countries. It's YOUR responsibility to check before using! Don't do shady things. Use responsibly and in accordance with the law!",
-    "Added background monitoring to keep re-enabling tweaks that may require periodic re-apply. This requires location services (Always allow) and notifications to remain active in the background. No actual location data is fetched. (Trick from AltStore)",
-    "Fixed several bugs."
+    "Preliminary iOS 26 Beta support!",
+    "Major changes to the UI, now features a welcome screen that lets you easily pick between Cosmetic tweaks, File Manager, and IPA Tweaker!",
+    "Bug Fixes and extra sanity checks."
   ],
   "criticalUpdate": true
 }
